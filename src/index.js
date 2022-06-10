@@ -8,7 +8,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { Provider } from "react-redux";
+import store from "./states/store";
+
 import "./App.scss";
+import "./custom.css";
 import App from "./App.jsx";
 
-ReactDOMClient.createRoot(document.getElementById("root")).render(<App />);
+import "react-toastify/dist/ReactToastify.css";
+
+ReactDOMClient.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);

@@ -1,28 +1,36 @@
 import React from "react";
+import Text from "../../common/Text";
+import ImageControl from "../../common/ImageControl";
 
-function Sponsor({ data }) {
-	return (
-		<>
-			<section id="sponsor">
-				<div className="contain text-center">
-					<div className="content">
-						<h2>{data.heading}</h2>
-					</div>
-					<ul className="brand_lst">
-						{data.icons.map((val) => {
-							return (
-								<li key={val.id}>
-									<div className="ico">
-										<img src={val.src} alt={val.alt} />
-									</div>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			</section>
-		</>
-	);
+function Sponsor({ content, sponsors }) {
+  return (
+    <>
+      <section id="sponsor">
+        <div className="contain text-center">
+          <div className="content">
+            <h2>
+              <Text string={content.spons_heading} />
+            </h2>
+          </div>
+          <ul className="brand_lst">
+            {sponsors.map((s) => {
+              return (
+                <li key={s.id}>
+                  <div className="ico">
+                    <ImageControl
+                      folder="visasponsors"
+                      src={s.image}
+                      specificWidth="200p_"
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export default Sponsor;

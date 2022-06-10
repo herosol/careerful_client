@@ -1,25 +1,31 @@
 import React from "react";
+import ImageControl from "../../common/ImageControl";
 
-function Brands({ data }) {
-	return (
-		<>
-			<section id="brands">
-				<div className="contain text-center">
-					<ul className="brand_lst">
-						{data.icons.map((val) => {
-							return (
-								<li key={val.id}>
-									<div className="ico">
-										<img src={val.src} alt={val.alt} />
-									</div>
-								</li>
-							);
-						})}
-					</ul>
-				</div>
-			</section>
-		</>
-	);
+function Brands({ partners }) {
+  return (
+    <>
+      <section id="brands">
+        <div className="contain text-center">
+          <ul className="brand_lst">
+            {partners.map((p) => {
+              return (
+                <li key={p.id}>
+                  <div className="ico">
+                    <ImageControl
+                      src={p.image}
+                      alt={p.image}
+                      folder="partners"
+                      specificWidth="200p_"
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+    </>
+  );
 }
 
 export default Brands;

@@ -1,26 +1,33 @@
 import React from "react";
+import ImageControl from "./ImageControl";
+import Text from "./Text";
 
-const FolioBlk = ({ src, alt, name, label, para, btn }) => {
-	return (
-		<>
-			<div className="folio_blk">
-				<div className="ico fill round">
-					<img src={src} alt={alt} />
-				</div>
-				<div className="txt">
-					<h4>
-						{name} <span>{label}</span>
-					</h4>
-					<p>{para}</p>
-					<div className="btn_blk">
-						<button className="site_btn text learn">
-							{btn} <i className="arrow"></i>
-						</button>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+const FolioBlk = (t) => {
+  return (
+    <>
+      <div className="folio_blk">
+        <div className="ico fill round">
+          <ImageControl src={t.image} folder="testimonials" isThumb={true} />
+        </div>
+        <div className="txt">
+          <h4>
+            <Text string={t.name} />
+            <span>
+              <Text string={t.place} />
+            </span>
+          </h4>
+          <p>
+            <Text string={t.detail} />
+          </p>
+          <div className="btn_blk">
+            <button className="site_btn text learn">
+              Read More <i className="arrow"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default FolioBlk;
