@@ -1,13 +1,49 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Data from "../../dummy";
 import Register from "./Register";
 
+import {
+  createAccount,
+  fetchSignup
+} from "../../../states/actions/fetchSignup";
+import { useSelector, useDispatch } from "react-redux";
+import useDocumentTitle from "../../../hooks/useDocumentTitle";
+import LoadingScreen from "../../common/LoadingScreen";
+
 const Signup = () => {
-	return (
-		<>
-			<Register data={Data.signup} />
-		</>
-	);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.fetchSignup.content);
+  const isLoading = useSelector((state) => state.fetchSignup.isLoading);
+  const { content } = data;
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    dispatch(fetchSignup());
+  }, []);
+
+  const handleSubmitAction = (formData) => {
+    dispatch(createAccount(formData));
+  };
+
+  useDocumentTitle(data.page_title);
+  return (
+    <>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <>
+          <Register
+            data={Data.signup}
+            content={content}
+            handleSubmitAction={handleSubmitAction}
+          />
+        </>
+      )}
+    </>
+  );
 };
 
 export default Signup;

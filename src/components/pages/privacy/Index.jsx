@@ -15,9 +15,9 @@ const Privacy = () => {
   const isLoading = useSelector((state) => state.fetchPrivacy.isLoading);
   const { content } = data;
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  // useEffect(() => {
+  //   console.log(data);
+  // }, [data]);
 
   useEffect(() => {
     dispatch(fetchPrivacy());

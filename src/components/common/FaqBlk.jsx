@@ -12,7 +12,7 @@ function FaqBlk(f) {
         {show && (
           <div className="txt">
             <p>
-              <Text string={f.answer} />
+              <Text string={f.answer} parse={true} />
             </p>
           </div>
         )}

@@ -1,24 +1,29 @@
 import React from "react";
 import FaqBlk from "../../common/FaqBlk";
+import Text from "../../common/Text";
 
-const Faqs = ({ data }) => {
-	return (
-		<>
-			<section id="faq_about" className="p-0">
-				<div className="contain">
-					<div className="content text-center">
-						<h6 className="tag">{data.tag}</h6>
-						<h2>{data.heading}</h2>
-					</div>
-					<div className="faq_lst">
-						{data.block.map((val) => {
-							return <FaqBlk key={val.id} {...val} />;
-						})}
-					</div>
-				</div>
-			</section>
-		</>
-	);
+const Faqs = ({ data, content, faqs }) => {
+  return (
+    <>
+      <section id="faq_about" className="p-0">
+        <div className="contain">
+          <div className="content text-center">
+            <h6 className="tag">
+              <Text string={content.faq_tag} />
+            </h6>
+            <h2>
+              <Text string={content.faq_heading} />
+            </h2>
+          </div>
+          <div className="faq_lst">
+            {faqs.map((f) => {
+              return <FaqBlk key={f.id} {...f} />;
+            })}
+          </div>
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default Faqs;
