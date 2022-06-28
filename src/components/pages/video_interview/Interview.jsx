@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TopBar from "./TopBar";
 import WebcamStreamCapture from "../../common/WebcamStreamCapture";
 
-const Register = ({ data }) => {
+const Register = ({ data, saveVideo, handleFinishProcess }) => {
   const [step, setStep] = useState(1);
   const [firstStepDone, setFirstStepDone] = useState(0);
   const [secondStepDone, setSecondStepDone] = useState(0);
@@ -10,6 +10,14 @@ const Register = ({ data }) => {
   const [fourthStepDone, setFourthStepDone] = useState(0);
   const [fifthStepDone, setFifthStepDone] = useState(0);
   const [sixthStepDone, setSixthStepDone] = useState(0);
+  const [saveOption, setSaveOption] = useState("no");
+
+  const handleFinishProcessFunction = () => {
+    handleFinishProcess({
+      interview_session_id: localStorage.getItem("interview_session_id"),
+      submit_for_review: saveOption
+    });
+  };
   return (
     <>
       <section id="interview">
@@ -31,12 +39,12 @@ const Register = ({ data }) => {
                 step.
               </h4>
               <div className="vid_blk">
-                <WebcamStreamCapture questionNo={1} />
+                <WebcamStreamCapture questionNo={0} saveVideo={saveVideo} />
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 <button
                   type="button"
-                  class="site_btn lg"
+                  className="site_btn lg"
                   onClick={() => {
                     setStep(2);
                     setFirstStepDone(1);
@@ -51,12 +59,12 @@ const Register = ({ data }) => {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </h4>
               <div className="vid_blk">
-                <WebcamStreamCapture questionNo={2} />
+                <WebcamStreamCapture questionNo={1} saveVideo={saveVideo} />
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 {/* <button
 									type="button"
-									class="site_btn light stroke lg"
+									className="site_btn light stroke lg"
 									onClick={() => {
 										setStep(1);
 										setSecondStepDone(1);
@@ -66,7 +74,7 @@ const Register = ({ data }) => {
 								</button> */}
                 <button
                   type="button"
-                  class="site_btn lg"
+                  className="site_btn lg"
                   onClick={() => {
                     setStep(3);
                     setSecondStepDone(2);
@@ -81,12 +89,12 @@ const Register = ({ data }) => {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </h4>
               <div className="vid_blk">
-                <WebcamStreamCapture questionNo={3} />
+                <WebcamStreamCapture questionNo={2} saveVideo={saveVideo} />
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 {/* <button
 									type="button"
-									class="site_btn light stroke lg"
+									className="site_btn light stroke lg"
 									onClick={() => {
 										setStep(2);
 										setThirdStepDone(2);
@@ -96,7 +104,7 @@ const Register = ({ data }) => {
 								</button> */}
                 <button
                   type="button"
-                  class="site_btn lg"
+                  className="site_btn lg"
                   onClick={() => {
                     setStep(4);
                     setThirdStepDone(3);
@@ -111,12 +119,12 @@ const Register = ({ data }) => {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </h4>
               <div className="vid_blk">
-                <WebcamStreamCapture questionNo={4} />
+                <WebcamStreamCapture questionNo={3} saveVideo={saveVideo} />
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 {/* <button
 									type="button"
-									class="site_btn light stroke lg"
+									className="site_btn light stroke lg"
 									onClick={() => {
 										setStep(3);
 										setFourthStepDone(3);
@@ -126,7 +134,7 @@ const Register = ({ data }) => {
 								</button> */}
                 <button
                   type="button"
-                  class="site_btn lg"
+                  className="site_btn lg"
                   onClick={() => {
                     setStep(5);
                     setFourthStepDone(4);
@@ -141,12 +149,12 @@ const Register = ({ data }) => {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit?
               </h4>
               <div className="vid_blk">
-                <WebcamStreamCapture questionNo={5} />
+                <WebcamStreamCapture questionNo={4} saveVideo={saveVideo} />
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 {/* <button
 									type="button"
-									class="site_btn light stroke lg"
+									className="site_btn light stroke lg"
 									onClick={() => {
 										setStep(4);
 										setFifthStepDone(4);
@@ -156,7 +164,7 @@ const Register = ({ data }) => {
 								</button> */}
                 <button
                   type="button"
-                  class="site_btn lg"
+                  className="site_btn lg"
                   onClick={() => {
                     setStep(6);
                     setFifthStepDone(5);
@@ -170,7 +178,14 @@ const Register = ({ data }) => {
               <h4 className="heading text-center">Upload or Finish</h4>
               <div className="form_blk">
                 <div className="lbl_btn">
-                  <input type="radio" name="confirm" id="confirm1" />
+                  <input
+                    type="radio"
+                    name="confirm"
+                    id="confirm1"
+                    value="no"
+                    checked={saveOption == "no"}
+                    onChange={() => setSaveOption("no")}
+                  />
                   <label htmlFor="confirm1">
                     Do you want to just finish it off
                   </label>
@@ -178,17 +193,24 @@ const Register = ({ data }) => {
               </div>
               <div className="form_blk">
                 <div className="lbl_btn">
-                  <input type="radio" name="confirm" id="confirm2" />
+                  <input
+                    type="radio"
+                    name="confirm"
+                    id="confirm2"
+                    value="yes"
+                    checked={saveOption == "yes"}
+                    onChange={() => setSaveOption("yes")}
+                  />
                   <label htmlFor="confirm2">
                     Do you want upload it or submit it for the review by an
                     expert
                   </label>
                 </div>
               </div>
-              <div class="btn_blk justify-content-center mt-5">
+              <div className="btn_blk justify-content-center mt-5">
                 {/* <button
 									type="button"
-									class="site_btn light stroke lg"
+									className="site_btn light stroke lg"
 									onClick={() => {
 										setStep(5);
 										setSixthStepDone(5);
@@ -197,12 +219,9 @@ const Register = ({ data }) => {
 									Previous step
 								</button> */}
                 <button
-                  type="submit"
-                  class="site_btn lg"
-                  onClick={() => {
-                    setStep(7);
-                    setSixthStepDone(6);
-                  }}
+                  type="button"
+                  className="site_btn lg"
+                  onClick={handleFinishProcessFunction}
                 >
                   Save and Finish
                 </button>

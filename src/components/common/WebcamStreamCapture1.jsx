@@ -1,15 +1,15 @@
 import React, { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
 
-const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
-  const webcamRef = useRef(null);
+const WebcamStreamCapture1 = ({ questionNo, saveVideo }) => {
+  const webcamReff = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
 
   const handleStartCaptureClick = useCallback(() => {
     setCapturing(true);
-    mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
+    mediaRecorderRef.current = new MediaRecorder(webcamReff.current.stream, {
       mimeType: "video/webm"
     });
     mediaRecorderRef.current.addEventListener(
@@ -17,7 +17,7 @@ const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
       handleDataAvailable
     );
     mediaRecorderRef.current.start();
-  }, [webcamRef, setCapturing, mediaRecorderRef]);
+  }, [webcamReff, setCapturing, mediaRecorderRef]);
 
   const handleDataAvailable = useCallback(
     ({ data }) => {
@@ -31,7 +31,7 @@ const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
   const handleStopCaptureClick = useCallback(() => {
     mediaRecorderRef.current.stop();
     setCapturing(false);
-  }, [mediaRecorderRef, webcamRef, setCapturing]);
+  }, [mediaRecorderRef, webcamReff, setCapturing]);
 
   // const handleDownload = useCallback(() => {
   //   if (recordedChunks.length) {
@@ -73,7 +73,8 @@ const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
 
   return (
     <>
-      <Webcam audio={true} ref={webcamRef} />
+      {console.log("HERE")}
+      <Webcam audio={true} ref={webcamReff} />
       {capturing ? (
         <button type="button" onClick={handleStopCaptureClick}>
           Stop Capture
@@ -87,4 +88,4 @@ const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
   );
 };
 
-export default WebcamStreamCapture;
+export default WebcamStreamCapture1;
