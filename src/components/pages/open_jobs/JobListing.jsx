@@ -1,7 +1,7 @@
 import React from "react";
 import JobBlk from "../../common/JobBlk";
 
-const JobListing = ({ listing, jobs, isSearching }) => {
+const JobListing = ({ listing, jobs, isSearching, saveJob, isJobSaving }) => {
   return (
     <>
       <div className="flex_row job_row row">
@@ -13,7 +13,7 @@ const JobListing = ({ listing, jobs, isSearching }) => {
           jobs.map((job) => {
             return (
               <div className="col" key={job.id}>
-                <JobBlk job={job} />
+                <JobBlk job={job} saveJob={saveJob} isJobSaving={isJobSaving} />
               </div>
             );
           })

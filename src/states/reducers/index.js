@@ -9,7 +9,10 @@ import fetchWorkWithUs from "./fetchWorkWithUs";
 import fetchJobProfile from "./fetchJobProfile";
 import fetchJobs from "./fetchJobs";
 import fetchSignup from "./fetchSignup";
+import fetchSignin from "./fetchSignin";
 import fetchVideoInterview from "./fetchVideoInterview";
+import fetchDashboard from "./fetchDashboard";
+import fetchProfileSettings from "./fetchProfileSettings";
 
 export default combineReducers({
   fetchHome,
@@ -21,6 +24,9 @@ export default combineReducers({
   fetchWorkWithUs,
   fetchJobProfile,
   fetchJobs,
+  fetchSignin,
   fetchSignup,
-  fetchVideoInterview
+  fetchVideoInterview,
+  fetchDashboard,
+  fetchProfileSettings
 });

@@ -5,55 +5,53 @@ import { TOAST_SETTINGS } from "../../utils/siteSettings";
 import Text from "../../components/common/Text";
 
 import {
-  FETCH_SIGN_UP_CONTENT,
-  FETCH_SIGN_UP_CONTENT_SUCCESS,
-  FETCH_SIGN_UP_CONTENT_FAILED,
-  CREATE_ACCOUNT_MESSAGE,
-  CREATE_ACCOUNT_MESSAGE_SUCCESS,
-  CREATE_ACCOUNT_MESSAGE_FAILED
+  FETCH_PROFILE_SETTINGS,
+  FETCH_PROFILE_SETTINGS_SUCCESS,
+  FETCH_PROFILE_SETTINGS_FAILED,
+  SAVE_PROFILE_SETTINGS,
+  SAVE_PROFILE_SETTINGS_SUCCESS,
+  SAVE_PROFILE_SETTINGS_FAILED
 } from "./actionTypes";
 
-export const fetchSignup = () => (dispatch) => {
+export const fetchProfileSettings = () => (dispatch) => {
   dispatch({
-    type: FETCH_SIGN_UP_CONTENT,
+    type: FETCH_PROFILE_SETTINGS,
     payload: null
   });
   http
-    .get("signup")
+    .post(
+      "user/profile-settings",
+      helpers.doObjToFormData({ token: localStorage.getItem("authToken") })
+    )
     .then(({ data }) => {
       dispatch({
-        type: FETCH_SIGN_UP_CONTENT_SUCCESS,
+        type: FETCH_PROFILE_SETTINGS_SUCCESS,
         payload: data
       });
     })
     .catch((error) => {
       dispatch({
-        type: FETCH_SIGN_UP_CONTENT_FAILED,
+        type: FETCH_PROFILE_SETTINGS_FAILED,
         payload: error
       });
     });
 };
 
-export const createAccount = (formData) => (dispatch) => {
+export const saveProfileSettingsAction = (formData) => (dispatch) => {
+  formData = { ...formData, authToken: localStorage.getItem("authToken") };
   dispatch({
-    type: CREATE_ACCOUNT_MESSAGE,
+    type: SAVE_PROFILE_SETTINGS,
     payload: null
   });
   http
-    .post("auth/create-account", helpers.doObjToFormData(formData))
+    .post("user/save-profile-settings", helpers.doObjToFormData(formData))
     .then(({ data }) => {
       if (data.status) {
-        toast.success(
-          "Account have been created successfully. Redirecting to dashboard, please wait...",
-          TOAST_SETTINGS
-        );
+        toast.success("Profile settings saved successfully.", TOAST_SETTINGS);
         dispatch({
-          type: CREATE_ACCOUNT_MESSAGE_SUCCESS,
+          type: SAVE_PROFILE_SETTINGS_SUCCESS,
           payload: data
         });
-        setTimeout(() => {
-          window.location.replace("/dashboard");
-        }, 6000);
       } else {
         if (data.validationErrors) {
           toast.error(
@@ -61,7 +59,7 @@ export const createAccount = (formData) => (dispatch) => {
             TOAST_SETTINGS
           );
           dispatch({
-            type: CREATE_ACCOUNT_MESSAGE_FAILED,
+            type: SAVE_PROFILE_SETTINGS_FAILED,
             payload: null
           });
         }
@@ -69,7 +67,7 @@ export const createAccount = (formData) => (dispatch) => {
     })
     .catch((error) => {
       dispatch({
-        type: CREATE_ACCOUNT_MESSAGE_FAILED,
+        type: SAVE_PROFILE_SETTINGS_FAILED,
         payload: error
       });
     });

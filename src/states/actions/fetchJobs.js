@@ -1,5 +1,8 @@
 import http from "../../helpers/http";
 import * as helpers from "../../helpers/helpers";
+import { toast } from "react-toastify";
+import { TOAST_SETTINGS } from "../../utils/siteSettings";
+import Text from "../../components/common/Text";
 
 import {
   FETCH_JOBS_CONTENT,
@@ -7,7 +10,10 @@ import {
   FETCH_JOBS_CONTENT_FAILED,
   FETCH_JOBS_SEARCH,
   FETCH_JOBS_SEARCH_SUCCESS,
-  FETCH_JOBS_SEARCH_FAILED
+  FETCH_JOBS_SEARCH_FAILED,
+  SAVE_JOB,
+  SAVE_JOB_SUCCESS,
+  SAVE_JOB_FAILED
 } from "./actionTypes";
 
 export const fetchJobs = () => (dispatch) => {
@@ -50,4 +56,38 @@ export const searchJobsData = (post) => (dispatch) => {
         payload: error
       });
     });
+};
+
+export const saveJobAction = (formData) => (dispatch) => {
+  if (localStorage.getItem("authToken")) {
+    dispatch({
+      type: SAVE_JOB,
+      payload: null
+    });
+    formData = { ...formData, authToken: localStorage.getItem("authToken") };
+    http
+      .post("save-job", helpers.doObjToFormData(formData))
+      .then(({ data }) => {
+        if (data.status) {
+          toast.success("Job Saved Successfully.", TOAST_SETTINGS);
+          dispatch({
+            type: SAVE_JOB_SUCCESS,
+            payload: data
+          });
+        } else {
+          dispatch({
+            type: SAVE_JOB_FAILED,
+            payload: null
+          });
+        }
+      })
+      .catch((error) => {
+        dispatch({
+          type: SAVE_JOB_FAILED,
+          payload: error
+        });
+      });
+  } else {
+    toast.error("Please signin first to save this job post.", TOAST_SETTINGS);
+  }
 };

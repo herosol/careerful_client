@@ -4,12 +4,16 @@ import {
   FETCH_JOBS_CONTENT_FAILED,
   FETCH_JOBS_SEARCH,
   FETCH_JOBS_SEARCH_SUCCESS,
-  FETCH_JOBS_SEARCH_FAILED
+  FETCH_JOBS_SEARCH_FAILED,
+  SAVE_JOB,
+  SAVE_JOB_SUCCESS,
+  SAVE_JOB_FAILED
 } from "../actions/actionTypes";
 
 const initialState = {
   isLoading: true,
   isSearching: false,
+  isJobSaving: false,
   content: {},
   jobs: [],
   error: false
@@ -54,6 +58,22 @@ export default function (state = initialState, { type, payload }) {
       return {
         ...state,
         isSearching: false,
+        error: payload
+      };
+    case SAVE_JOB:
+      return {
+        ...state,
+        isJobSaving: true
+      };
+    case SAVE_JOB_SUCCESS:
+      return {
+        ...state,
+        isJobSaving: false
+      };
+    case SAVE_JOB_FAILED:
+      return {
+        ...state,
+        isJobSaving: false,
         error: payload
       };
     default:

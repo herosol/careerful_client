@@ -1,51 +1,52 @@
 import {
-  FETCH_SIGN_UP_CONTENT,
-  FETCH_SIGN_UP_CONTENT_SUCCESS,
-  FETCH_SIGN_UP_CONTENT_FAILED,
-  CREATE_ACCOUNT_MESSAGE,
-  CREATE_ACCOUNT_MESSAGE_SUCCESS,
-  CREATE_ACCOUNT_MESSAGE_FAILED
+  FETCH_SIGN_IN_CONTENT,
+  FETCH_SIGN_IN_CONTENT_SUCCESS,
+  FETCH_SIGN_IN_CONTENT_FAILED,
+  SIGN_IN_ACCOUNT_MESSAGE,
+  SIGN_IN_ACCOUNT_MESSAGE_SUCCESS,
+  SIGN_IN_ACCOUNT_MESSAGE_FAILED
 } from "../actions/actionTypes";
 
 const initialState = {
   isLoading: true,
   content: {},
   error: false,
-  isFormProcessing: false
+  isFormProcessing: false,
+  authToken: localStorage.getItem("authToken")
 };
 
 export default function (state = initialState, { type, payload }) {
   switch (type) {
-    case FETCH_SIGN_UP_CONTENT:
+    case FETCH_SIGN_IN_CONTENT:
       return {
         ...state,
         isLoading: true,
         content: {}
       };
-    case FETCH_SIGN_UP_CONTENT_SUCCESS:
+    case FETCH_SIGN_IN_CONTENT_SUCCESS:
       return {
         ...state,
         isLoading: false,
         content: payload
       };
-    case FETCH_SIGN_UP_CONTENT_FAILED:
+    case FETCH_SIGN_IN_CONTENT_FAILED:
       return {
         ...state,
         isLoading: false,
         error: payload
       };
-    case CREATE_ACCOUNT_MESSAGE:
+    case SIGN_IN_ACCOUNT_MESSAGE:
       return {
         ...state,
         isFormProcessing: true
       };
-    case CREATE_ACCOUNT_MESSAGE_SUCCESS:
+    case SIGN_IN_ACCOUNT_MESSAGE_SUCCESS:
       localStorage.setItem("authToken", payload.authToken);
       return {
         ...state,
         isFormProcessing: true
       };
-    case CREATE_ACCOUNT_MESSAGE_FAILED:
+    case SIGN_IN_ACCOUNT_MESSAGE_FAILED:
       return {
         ...state,
         isFormProcessing: false,

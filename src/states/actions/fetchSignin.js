@@ -5,55 +5,55 @@ import { TOAST_SETTINGS } from "../../utils/siteSettings";
 import Text from "../../components/common/Text";
 
 import {
-  FETCH_SIGN_UP_CONTENT,
-  FETCH_SIGN_UP_CONTENT_SUCCESS,
-  FETCH_SIGN_UP_CONTENT_FAILED,
-  CREATE_ACCOUNT_MESSAGE,
-  CREATE_ACCOUNT_MESSAGE_SUCCESS,
-  CREATE_ACCOUNT_MESSAGE_FAILED
+  FETCH_SIGN_IN_CONTENT,
+  FETCH_SIGN_IN_CONTENT_SUCCESS,
+  FETCH_SIGN_IN_CONTENT_FAILED,
+  SIGN_IN_ACCOUNT_MESSAGE,
+  SIGN_IN_ACCOUNT_MESSAGE_SUCCESS,
+  SIGN_IN_ACCOUNT_MESSAGE_FAILED
 } from "./actionTypes";
 
-export const fetchSignup = () => (dispatch) => {
+export const fetchSignin = () => (dispatch) => {
   dispatch({
-    type: FETCH_SIGN_UP_CONTENT,
+    type: FETCH_SIGN_IN_CONTENT,
     payload: null
   });
   http
-    .get("signup")
+    .get("signin")
     .then(({ data }) => {
       dispatch({
-        type: FETCH_SIGN_UP_CONTENT_SUCCESS,
+        type: FETCH_SIGN_IN_CONTENT_SUCCESS,
         payload: data
       });
     })
     .catch((error) => {
       dispatch({
-        type: FETCH_SIGN_UP_CONTENT_FAILED,
+        type: FETCH_SIGN_IN_CONTENT_FAILED,
         payload: error
       });
     });
 };
 
-export const createAccount = (formData) => (dispatch) => {
+export const signin = (formData) => (dispatch) => {
   dispatch({
-    type: CREATE_ACCOUNT_MESSAGE,
+    type: SIGN_IN_ACCOUNT_MESSAGE,
     payload: null
   });
   http
-    .post("auth/create-account", helpers.doObjToFormData(formData))
+    .post("auth/signin", helpers.doObjToFormData(formData))
     .then(({ data }) => {
       if (data.status) {
         toast.success(
-          "Account have been created successfully. Redirecting to dashboard, please wait...",
+          "Signin successfully. Redirecting to dashboard, please wait...",
           TOAST_SETTINGS
         );
         dispatch({
-          type: CREATE_ACCOUNT_MESSAGE_SUCCESS,
+          type: SIGN_IN_ACCOUNT_MESSAGE_SUCCESS,
           payload: data
         });
         setTimeout(() => {
           window.location.replace("/dashboard");
-        }, 6000);
+        }, 4000);
       } else {
         if (data.validationErrors) {
           toast.error(
@@ -61,7 +61,7 @@ export const createAccount = (formData) => (dispatch) => {
             TOAST_SETTINGS
           );
           dispatch({
-            type: CREATE_ACCOUNT_MESSAGE_FAILED,
+            type: SIGN_IN_ACCOUNT_MESSAGE_FAILED,
             payload: null
           });
         }
@@ -69,7 +69,7 @@ export const createAccount = (formData) => (dispatch) => {
     })
     .catch((error) => {
       dispatch({
-        type: CREATE_ACCOUNT_MESSAGE_FAILED,
+        type: SIGN_IN_ACCOUNT_MESSAGE_FAILED,
         payload: error
       });
     });

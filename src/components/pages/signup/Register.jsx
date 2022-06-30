@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar";
 import Text from "../../common/Text";
+import FormProcessingSpinner from "../../common/FormProcessingSpinner";
 
-const Register = ({ data, content, handleSubmitAction }) => {
+const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
   const [step, setStep] = useState(1);
   const [firstStepDone, setFirstStepDone] = useState(0);
   const [secondStepDone, setSecondStepDone] = useState(0);
@@ -35,6 +36,10 @@ const Register = ({ data, content, handleSubmitAction }) => {
     e.preventDefault();
     handleSubmitAction(formVal);
   };
+
+  // useEffect(() => {
+  //   console.log(isFormProcessing);
+  // }, [isFormProcessing]);
   return (
     <>
       <section id="register">
@@ -363,7 +368,9 @@ const Register = ({ data, content, handleSubmitAction }) => {
                   onClick={() => {
                     setThirdStepDone(1);
                   }}
+                  disabled={isFormProcessing}
                 >
+                  <FormProcessingSpinner isFormProcessing={isFormProcessing} />
                   Save and Finish
                 </button>
               </div>

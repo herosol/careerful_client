@@ -10,7 +10,9 @@ const JobList = ({
   cats,
   searchJobs,
   degree_req,
-  isSearching
+  isSearching,
+  saveJob,
+  isJobSaving
 }) => {
   const [active, setActive] = useState(false);
   const [sortBy, setSortBy] = useState("desc");
@@ -239,6 +241,8 @@ const JobList = ({
                 listing={data.jobs}
                 jobs={jobs}
                 isSearching={isSearching}
+                saveJob={saveJob}
+                isJobSaving={isJobSaving}
               />
             </div>
           </div>
