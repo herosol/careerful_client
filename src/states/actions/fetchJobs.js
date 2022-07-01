@@ -22,7 +22,10 @@ export const fetchJobs = () => (dispatch) => {
     payload: null
   });
   http
-    .get("jobs")
+    .post(
+      "jobs",
+      helpers.doObjToFormData({ authToken: localStorage.getItem("authToken") })
+    )
     .then(({ data }) => {
       dispatch({
         type: FETCH_JOBS_CONTENT_SUCCESS,
@@ -38,6 +41,7 @@ export const fetchJobs = () => (dispatch) => {
 };
 
 export const searchJobsData = (post) => (dispatch) => {
+  post = { ...post, authToken: localStorage.getItem("authToken") };
   dispatch({
     type: FETCH_JOBS_SEARCH,
     payload: null

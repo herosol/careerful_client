@@ -65,6 +65,7 @@ const WebcamStreamCapture = ({ questionNo, saveVideo }) => {
       );
       formData.append("video", videoFile);
       formData.append("questionNo", questionNo);
+      formData.append("authToken", localStorage.getItem("authToken"));
       // console.log(formData);
       // console.log(videoFile);
       saveVideo(formData);

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import ChangePass from "./ChangePass";
 
-const Settings = ({ data, mem, isFormProcessing, saveProfileSettings }) => {
+const Settings = ({
+  data,
+  mem,
+  isFormProcessing,
+  saveProfileSettings,
+  changePassword,
+  isPassChangeProcessing
+}) => {
   const [formVal, setFormVal] = useState({
     fname: mem.mem_fname,
     lname: mem.mem_lname,
@@ -350,7 +357,11 @@ const Settings = ({ data, mem, isFormProcessing, saveProfileSettings }) => {
           </form>
           <div className="br"></div>
           <div className="br"></div>
-          <ChangePass val={change_pass} />
+          <ChangePass
+            val={change_pass}
+            changePassword={changePassword}
+            isPassChangeProcessing={isPassChangeProcessing}
+          />
         </div>
       </section>
     </>

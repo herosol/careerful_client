@@ -87,7 +87,13 @@ function App() {
             <Route exact path="/signin" element={<Signin />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/forgot-password" element={<Forgot />} />
-            <Route exact path="/video-interview" element={<VideoInterview />} />
+            {authToken && (
+              <Route
+                exact
+                path="/video-interview"
+                element={<VideoInterview />}
+              />
+            )}
             <Route exact path="/job-profile" element={<JobProfile />} />
             <Route exact path="/booking" element={<Booking />} />
             <Route exact path="/privacy-policy" element={<Privacy />} />

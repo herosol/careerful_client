@@ -74,3 +74,8 @@ export const signin = (formData) => (dispatch) => {
       });
     });
 };
+
+// export const signout = () => {
+//   localStorage.removeItem("authToken");
+//   window.location.replace("/signin");
+// };

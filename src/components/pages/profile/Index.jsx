@@ -4,7 +4,8 @@ import Settings from "./Settings";
 
 import {
   fetchProfileSettings,
-  saveProfileSettingsAction
+  saveProfileSettingsAction,
+  changePasswordAction
 } from "../../../states/actions/fetchProfileSettings";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingScreen from "../../common/LoadingScreen";
@@ -20,6 +21,9 @@ const Profile = () => {
   const isFormProcessing = useSelector(
     (state) => state.fetchProfileSettings.isFormProcessing
   );
+  const isPassChangeProcessing = useSelector(
+    (state) => state.fetchProfileSettings.isPassChangeProcessing
+  );
   const mem = useSelector((state) => state.fetchProfileSettings.mem);
   useEffect(() => {
     dispatch(fetchProfileSettings());
@@ -28,6 +32,11 @@ const Profile = () => {
   const saveProfileSettings = (formData) => {
     dispatch(saveProfileSettingsAction(formData));
   };
+
+  const changePassword = (formData) => {
+    dispatch(changePasswordAction(formData));
+  };
+
   useDocumentTitle(data.page_title);
   return (
     <>
@@ -41,6 +50,8 @@ const Profile = () => {
             mem={mem}
             isFormProcessing={isFormProcessing}
             saveProfileSettings={saveProfileSettings}
+            changePassword={changePassword}
+            isPassChangeProcessing={isPassChangeProcessing}
           />
         </>
       )}

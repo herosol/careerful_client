@@ -3,7 +3,6 @@ import httpBlob from "../../helpers/http-blob";
 import * as helpers from "../../helpers/helpers";
 import { toast } from "react-toastify";
 import { TOAST_SETTINGS } from "../../utils/siteSettings";
-import Text from "../../components/common/Text";
 
 import {
   FETCH_VIDEO_INTERVIEW_CONTENT,
@@ -52,7 +51,6 @@ export const saveVideoStep = (formData) => (dispatch) => {
             data.interview_session_id
           );
         }
-        console.log(localStorage.getItem("interview_session_id"));
       }
       dispatch({
         type: SAVE_INTERVIEW_VIDEO_SUCCESS,
@@ -76,8 +74,10 @@ export const finishInterview = (formData) => (dispatch) => {
     .post("save-interview", helpers.doObjToFormData(formData))
     .then(({ data }) => {
       if (data.status) {
-        localStorage.setItem("interview_session_id", "");
-        console.log("Saved Successfully");
+        toast.success("Video Interview Saved successfully.", TOAST_SETTINGS);
+        setTimeout(() => {
+          window.location.replace("/dashboard");
+        }, 4000);
       }
       //   dispatch({
       //     type: SAVE_INTERVIEW_VIDEO_SUCCESS,

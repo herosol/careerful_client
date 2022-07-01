@@ -10,7 +10,10 @@ import {
   FETCH_PROFILE_SETTINGS_FAILED,
   SAVE_PROFILE_SETTINGS,
   SAVE_PROFILE_SETTINGS_SUCCESS,
-  SAVE_PROFILE_SETTINGS_FAILED
+  SAVE_PROFILE_SETTINGS_FAILED,
+  CHANGE_PASSWORD,
+  CHANGE_PASSWORD_SUCCESS,
+  CHANGE_PASSWORD_FAILED
 } from "./actionTypes";
 
 export const fetchProfileSettings = () => (dispatch) => {
@@ -68,6 +71,42 @@ export const saveProfileSettingsAction = (formData) => (dispatch) => {
     .catch((error) => {
       dispatch({
         type: SAVE_PROFILE_SETTINGS_FAILED,
+        payload: error
+      });
+    });
+};
+
+export const changePasswordAction = (formData) => (dispatch) => {
+  formData = { ...formData, authToken: localStorage.getItem("authToken") };
+  dispatch({
+    type: CHANGE_PASSWORD,
+    payload: null
+  });
+  http
+    .post("user/change-password", helpers.doObjToFormData(formData))
+    .then(({ data }) => {
+      if (data.status) {
+        toast.success("Password changed successfully.", TOAST_SETTINGS);
+        dispatch({
+          type: CHANGE_PASSWORD_SUCCESS,
+          payload: data
+        });
+      } else {
+        if (data.validationErrors) {
+          toast.error(
+            <Text string={data.validationErrors} parse={true} />,
+            TOAST_SETTINGS
+          );
+          dispatch({
+            type: CHANGE_PASSWORD_FAILED,
+            payload: null
+          });
+        }
+      }
+    })
+    .catch((error) => {
+      dispatch({
+        type: CHANGE_PASSWORD_FAILED,
         payload: error
       });
     });

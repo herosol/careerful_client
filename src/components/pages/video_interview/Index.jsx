@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Data from "../../dummy";
 import Interview from "./Interview";
 import httpBlob from "../../../helpers/http-blob";
+import { ToastContainer } from "react-toastify";
 
 import {
   saveVideoStep,
@@ -26,6 +27,7 @@ const VideoInterview = () => {
 
   return (
     <>
+      <ToastContainer />
       <Interview
         data={Data.interview}
         saveVideo={saveVideo}
