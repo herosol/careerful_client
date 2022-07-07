@@ -66,9 +66,16 @@ export default function (state = initialState, { type, payload }) {
         isJobSaving: true
       };
     case SAVE_JOB_SUCCESS:
+      const newJobs = state.jobs.map((job, index) => {
+        if (job.id === payload.id) {
+          job.saved = true;
+        }
+        return job;
+      });
       return {
         ...state,
-        isJobSaving: false
+        isJobSaving: false,
+        jobs: newJobs
       };
     case SAVE_JOB_FAILED:
       return {

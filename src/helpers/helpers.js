@@ -45,16 +45,18 @@ export function getUploadsUrl(folder, src) {
   return base_api_url + folder + "/" + src;
 }
 
-export function newsDateFormat(date) {
-  // alert(date);
-  return moment(date).format("DD MMMM YYYY");
-}
-
-export function blogsDateFormat(date) {
-  // alert(date);
-  return moment(date).format("DD MMMM YYYY");
+export function eventDateFormat(date) {
+  return moment(date).format("DD, MMMM YYYY");
 }
 
 export function eventTimeFormat(time) {
-  return moment(time, "HHmmss").format("hh:mm A");
+  return moment(time, "HHmm").format("hh:mm A");
+}
+
+export function onlyDayThreeletters(date) {
+  return moment(date).format("ddd");
+}
+
+export function onlyDateTwoletters(date) {
+  return moment(date).format("DD");
 }

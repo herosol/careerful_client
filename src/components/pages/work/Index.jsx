@@ -12,11 +12,11 @@ import useDocumentTitle from "../../../hooks/useDocumentTitle";
 import LoadingScreen from "../../common/LoadingScreen";
 
 const Work = () => {
-  const { page_intro, vision, faq, companies, strip } = Data.work;
+  const { page_intro, vision, faq, strip } = Data.work;
   const dispatch = useDispatch();
   const data = useSelector((state) => state.fetchWorkWithUs.content);
   const isLoading = useSelector((state) => state.fetchWorkWithUs.isLoading);
-  const { content, faqs } = data;
+  const { content, faqs, companies } = data;
 
   useEffect(() => {
     dispatch(fetchWorkWithUs());
@@ -32,7 +32,7 @@ const Work = () => {
           <PageIntro data={page_intro} content={content} />
           <Vision data={vision} content={content} />
           <Faqs data={faq} faqs={faqs} content={content} />
-          <Companies data={companies} content={content} />
+          <Companies content={content} companies={companies} />
           <Strip data={strip} content={content} />
         </>
       )}

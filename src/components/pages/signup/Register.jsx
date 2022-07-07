@@ -24,12 +24,30 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
     edu_degree: "",
     edu_graduation: "",
     job_type: "",
-    sector: ""
+    sector: "",
+    disability: "",
+    confirm: ""
   });
   const inputHandle = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setFormVal({ ...formVal, [name]: value });
+    const type = e.target.type;
+    if (type == "checkbox") {
+      setFormVal({
+        ...formVal,
+        [name]: e.target.checked
+      });
+    } else if (type == "file") {
+      setFormVal({
+        ...formVal,
+        [name]: e.target.files[0]
+      });
+    } else {
+      setFormVal({
+        ...formVal,
+        [name]: value
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -38,8 +56,12 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
   };
 
   // useEffect(() => {
-  //   console.log(isFormProcessing);
-  // }, [isFormProcessing]);
+  //   console.log(formVal);
+  // }, [formVal]);
+
+  const setTopStep = (step) => {
+    setStep(step);
+  };
   return (
     <>
       <section id="register">
@@ -52,6 +74,7 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
             firstStepDone={firstStepDone}
             secondStepDone={secondStepDone}
             thirdStepDone={thirdStepDone}
+            setTopStep={setTopStep}
           />
           <form action="" method="POST" onSubmit={handleSubmit}>
             <fieldset className={step === 1 ? "active" : ""}>
@@ -180,6 +203,9 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
                           type="radio"
                           name="disability"
                           id="disability_yes"
+                          value="yes"
+                          onChange={inputHandle}
+                          checked={formVal.disability === "yes"}
                         />
                         <span>Yes</span>
                       </label>
@@ -190,6 +216,9 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
                           type="radio"
                           name="disability"
                           id="disability_no"
+                          value="no"
+                          onChange={inputHandle}
+                          checked={formVal.disability === "no"}
                         />
                         <span>No</span>
                       </label>
@@ -332,17 +361,31 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
                   </select>
                 </div>
                 <div className="col-sm-12">
-                  <div className="form_blk upload_blk long">
+                  <input
+                    type="file"
+                    name="document"
+                    id="document"
+                    onChange={inputHandle}
+                  />
+                  <div
+                    className="form_blk upload_blk long"
+                    style={{ display: "none" }}
+                  >
                     <button type="button" className="input">
                       Upload Your CV
                     </button>
-                    <input type="file" name="document" id="document" />
                   </div>
                 </div>
                 <div className="col-sm-12">
                   <div className="form_blk">
                     <div className="lbl_btn">
-                      <input type="checkbox" name="confirm" id="confirm" />
+                      <input
+                        type="checkbox"
+                        name="confirm"
+                        id="confirm"
+                        value=""
+                        onClick={inputHandle}
+                      />
                       <label htmlFor="confirm">
                         I agree to Careerful&nbsp;
                         <Link target="_blank" to="/terms-conditions">
@@ -370,7 +413,6 @@ const Register = ({ data, content, handleSubmitAction, isFormProcessing }) => {
                   }}
                   disabled={isFormProcessing}
                 >
-                  <FormProcessingSpinner isFormProcessing={isFormProcessing} />
                   Save and Finish
                 </button>
               </div>

@@ -79,11 +79,10 @@ const JobBlk = ({ admin, job, saveJob, isJobSaving }) => {
               </div>
             ) : (
               <div className="act_btn">
-                {console.log(job)}
                 {job.saved ? (
                   "saved"
                 ) : (
-                  <button
+                  <a
                     type="button"
                     onClick={() => handleSaveJob(job.id)}
                     disabled={isJobSaving}
@@ -92,7 +91,7 @@ const JobBlk = ({ admin, job, saveJob, isJobSaving }) => {
                       src={process.env.PUBLIC_URL + "/images/icon-bookmark.svg"}
                       alt=""
                     />
-                  </button>
+                  </a>
                 )}
               </div>
             )}

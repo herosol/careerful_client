@@ -2,7 +2,7 @@ import React from "react";
 import CompanyBlk from "./CompanyBlk";
 import Text from "./Text";
 
-function Companies({ data, content }) {
+function Companies({ data, content, companies }) {
   return (
     <>
       <section id="companies">
@@ -16,10 +16,10 @@ function Companies({ data, content }) {
             </h2>
           </div>
           <div className="flex_row main_row row center">
-            {data.block.map((val) => {
+            {companies.map((c) => {
               return (
-                <div className="col col-lg-4 col-md-6" key={val.id}>
-                  <CompanyBlk {...val} />
+                <div className="col col-lg-4 col-md-6" key={c.id}>
+                  <CompanyBlk company={c} />
                 </div>
               );
             })}

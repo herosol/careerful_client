@@ -41,13 +41,13 @@ function Footer() {
       },
       {
         id: 3,
-        text: "Faqs",
-        link: "/faq"
+        text: "Careers",
+        link: "/careers"
       },
       {
         id: 4,
-        text: "Work With Us",
-        link: "/work-with-us"
+        text: "Faqs",
+        link: "/faq"
       },
       {
         id: 5,
@@ -58,23 +58,23 @@ function Footer() {
     list_03: [
       {
         id: 1,
-        text: "Blogs & News",
-        link: "/blog"
+        text: "For Universities",
+        link: "/for-universities"
       },
       {
         id: 2,
-        text: "Recent Activities",
-        link: "/recent-activities"
+        text: "For Employers",
+        link: "/for-employers"
       },
       {
         id: 3,
-        text: "eBook and Papers",
-        link: "/ebook-and-papers"
+        text: "Job Profile",
+        link: "/job-profile"
       },
       {
         id: 4,
-        text: "Images and Update",
-        link: "/images-and-update"
+        text: "Events",
+        link: "/events"
       }
     ],
     sm_list: [

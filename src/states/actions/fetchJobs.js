@@ -63,6 +63,7 @@ export const searchJobsData = (post) => (dispatch) => {
 };
 
 export const saveJobAction = (formData) => (dispatch) => {
+  let jobId = formData.id;
   if (localStorage.getItem("authToken")) {
     dispatch({
       type: SAVE_JOB,
@@ -73,6 +74,7 @@ export const saveJobAction = (formData) => (dispatch) => {
       .post("save-job", helpers.doObjToFormData(formData))
       .then(({ data }) => {
         if (data.status) {
+          data = { ...data, id: jobId };
           toast.success("Job Saved Successfully.", TOAST_SETTINGS);
           dispatch({
             type: SAVE_JOB_SUCCESS,

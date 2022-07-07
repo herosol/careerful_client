@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChangePass from "./ChangePass";
 
 const Settings = ({
@@ -23,8 +23,14 @@ const Settings = ({
     edu_degree: mem.mem_subject,
     edu_graduation: mem.mem_graduate_year,
     job_type: mem.mem_opportunity,
-    sector: mem.mem_industry
+    sector: mem.mem_industry,
+    disability: mem.mem_disablity
   });
+
+  useEffect(() => {
+    console.log(formVal);
+  }, [formVal]);
+
   const {
     personal_info,
     opportunity_info,
@@ -222,6 +228,9 @@ const Settings = ({
                         type="radio"
                         name="disability"
                         id="disability_yes"
+                        value="yes"
+                        checked={formVal.disability === "yes"}
+                        onChange={handleInputChange}
                       />
                       <span>Yes</span>
                     </label>
@@ -232,6 +241,9 @@ const Settings = ({
                         type="radio"
                         name="disability"
                         id="disability_no"
+                        value="no"
+                        checked={formVal.disability === "no"}
+                        onChange={handleInputChange}
                       />
                       <span>No</span>
                     </label>

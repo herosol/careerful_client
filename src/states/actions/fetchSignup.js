@@ -1,4 +1,5 @@
 import http from "../../helpers/http";
+import httpBlob from "../../helpers/http-blob";
 import * as helpers from "../../helpers/helpers";
 import { toast } from "react-toastify";
 import { TOAST_SETTINGS } from "../../utils/siteSettings";
@@ -35,12 +36,16 @@ export const fetchSignup = () => (dispatch) => {
 };
 
 export const createAccount = (formData) => (dispatch) => {
+  let file = formData.document;
+  delete formData.document;
+  formData = helpers.doObjToFormData(formData);
+  formData.append("document", file);
   dispatch({
     type: CREATE_ACCOUNT_MESSAGE,
     payload: null
   });
-  http
-    .post("auth/create-account", helpers.doObjToFormData(formData))
+  httpBlob
+    .post("auth/create-account", formData)
     .then(({ data }) => {
       if (data.status) {
         toast.success(

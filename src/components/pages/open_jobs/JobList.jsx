@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import SearchBar from "../../common/SearchBar";
 import JobListing from "./JobListing";
+import Data from "../../dummy";
 
 const JobList = ({
   data,
@@ -14,6 +16,8 @@ const JobList = ({
   saveJob,
   isJobSaving
 }) => {
+  const { icon, icon_alt, btn, flag, flag_alt } = Data.srch_bar;
+  const [searchParams] = useSearchParams();
   const [active, setActive] = useState(false);
   const [sortBy, setSortBy] = useState("desc");
   const [jobCats, setJobCats] = useState({});
@@ -21,6 +25,9 @@ const JobList = ({
   const [citiesFilter, setCitiesFilter] = useState({});
   const [tpyesFilter, settypesFilter] = useState({});
   const [visaAcceptance, setVisaAcceptance] = useState(false);
+  const [search, setSearch] = useState(searchParams.get("search"));
+  const [searchByField, setSearchByField] = useState(false);
+
   const toggleFilter = () => {
     setActive(!active);
   };
@@ -53,6 +60,16 @@ const JobList = ({
     });
   };
 
+  const handleSearchChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    if (search === "") {
+      setSearchByField(!searchByField);
+    }
+  }, [search]);
+
   useEffect(() => {
     let jobCatsArr = [];
     for (let key in jobCats) {
@@ -80,7 +97,8 @@ const JobList = ({
       cities: citiesFilterArr,
       types: tpyesFilterArr,
       jobRequirements: degreeRequirementsArr,
-      visaAcceptance: visaAcceptance
+      visaAcceptance: visaAcceptance,
+      searchKeyword: search
     };
     // console.log(filters);
     searchJobs(filters);
@@ -90,7 +108,8 @@ const JobList = ({
     citiesFilter,
     tpyesFilter,
     visaAcceptance,
-    jobRequirements
+    jobRequirements,
+    searchByField
   ]);
 
   return (
@@ -98,7 +117,34 @@ const JobList = ({
       <section id="open_jobs">
         <div className="top_blk">
           <div className="contain">
-            <SearchBar />
+            <form action="/open-jobs" method="GET" id="srch_bar">
+              <div className="inside input">
+                <div className="flag_blk d-inline-flex align-items-center">
+                  UK <img src={flag} alt={flag_alt} />
+                </div>
+                <div className="form_blk">
+                  <img src={icon} alt={icon_alt} />
+                  <input
+                    type="text"
+                    name="search"
+                    id="search"
+                    value={search}
+                    onChange={handleSearchChange}
+                    className="input"
+                    placeholder="Job, Company, Location"
+                    autoComplete="off"
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="site_btn"
+                  onClick={() => setSearchByField(!searchByField)}
+                  disabled={isSearching || search === ""}
+                >
+                  {btn}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
         <div className="contain">

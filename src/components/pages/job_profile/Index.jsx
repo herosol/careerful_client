@@ -13,7 +13,7 @@ const JobProfile = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.fetchJobProfile.content);
   const isLoading = useSelector((state) => state.fetchJobProfile.isLoading);
-  const { content, faqs } = data;
+  const { content, profiles } = data;
 
   useEffect(() => {
     dispatch(fetchJobProfile());
@@ -27,7 +27,7 @@ const JobProfile = () => {
       ) : (
         <>
           <JobsIntro content={content} />
-          <JobProfileList data={list} />
+          <JobProfileList data={list} profiles={profiles} />
           {/* <Categories data={categories} /> */}
         </>
       )}

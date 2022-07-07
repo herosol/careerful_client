@@ -21,6 +21,10 @@ const Signup = () => {
   const { content } = data;
 
   useEffect(() => {
+    console.log(isFormProcessing);
+  }, [isFormProcessing]);
+
+  useEffect(() => {
     dispatch(fetchSignup());
   }, []);
 
