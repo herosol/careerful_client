@@ -6,7 +6,7 @@ const JobProfileBlk = ({ profile }) => {
   return (
     <div className="job_profile_blk">
       <div className="fig">
-        <Link to="/job-profile">
+        <Link to={`/job-profile-detail/${profile.id}`}>
           <ImageControl
             src={profile.image}
             folder="job_profile"
@@ -16,7 +16,7 @@ const JobProfileBlk = ({ profile }) => {
       </div>
       <div className="txt">
         <h4>
-          <Link to="/job-profile">
+          <Link to={`/job-profile-detail/${profile.id}`}>
             <Text string={profile.title} />
           </Link>
         </h4>
@@ -24,7 +24,10 @@ const JobProfileBlk = ({ profile }) => {
           <Text string={profile.short_desc} />
         </p>
         <div className="btn_blk">
-          <Link to="/job-profile" className="site_btn text learn">
+          <Link
+            to={`/job-profile-detail/${profile.id}`}
+            className="site_btn text learn"
+          >
             Read More
             <i className="arrow"></i>
           </Link>

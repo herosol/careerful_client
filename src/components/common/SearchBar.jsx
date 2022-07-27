@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Data from "../dummy";
+import Text from "./Text";
 
-const SearchBar = () => {
+const SearchBar = ({ content }) => {
   const { icon, icon_alt, btn, flag, flag_alt } = Data.srch_bar;
   const [formVal, setFormVal] = useState({
     search: ""
@@ -27,12 +28,12 @@ const SearchBar = () => {
               value={formVal.search}
               onChange={inputHandle}
               className="input"
-              placeholder="Job, Company, Location"
+              placeholder={content.banner_field_heading}
               autoComplete="off"
             />
           </div>
           <button type="submit" className="site_btn">
-            {btn}
+            <Text string={content.banner_button_text} />
           </button>
         </div>
       </form>

@@ -60,3 +60,7 @@ export function onlyDayThreeletters(date) {
 export function onlyDateTwoletters(date) {
   return moment(date).format("DD");
 }
+
+export function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

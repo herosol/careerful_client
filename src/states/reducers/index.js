@@ -17,6 +17,10 @@ import fetchDashboard from "./fetchDashboard";
 import fetchProfileSettings from "./fetchProfileSettings";
 import fetchEvents from "./fetchEvents";
 import fetchEventDetail from "./fetchEventDetail";
+import fetchBlogs from "./fetchBlogs";
+import fetchBlogDetail from "./fetchBlogDetail";
+import fetchJobProfileDetail from "./fetchJobProfileDetail";
+import fetchUkCorporate from "./fetchUkCorporate";
 
 export default combineReducers({
   fetchHome,
@@ -36,5 +40,9 @@ export default combineReducers({
   fetchDashboard,
   fetchProfileSettings,
   fetchEvents,
-  fetchEventDetail
+  fetchEventDetail,
+  fetchBlogs,
+  fetchBlogDetail,
+  fetchJobProfileDetail,
+  fetchUkCorporate
 });

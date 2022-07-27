@@ -20,6 +20,7 @@ import Forgot from "./components/pages/forgot/Index";
 import VideoInterview from "./components/pages/video_interview/Index";
 
 import JobProfile from "./components/pages/job_profile/Index";
+import JobProfileDetail from "./components/pages/job_profile/Detail";
 import Booking from "./components/pages/booking/Index";
 import Privacy from "./components/pages/privacy/Index";
 import Disclaim from "./components/pages/disclaimer/Index";
@@ -31,6 +32,9 @@ import Statistics from "./components/pages/statistics/Index";
 import Profile from "./components/pages/profile/Index";
 import Subscription from "./components/pages/subscription/Index";
 
+import Blogs from "./components/pages/blogs";
+import BlogDetail from "./components/pages/blogs/Detail";
+import UkCorporate from "./components/pages/uk_corporate/Index";
 // Error & Popup
 import Error from "./components/pages/error/Index";
 import PopupVideo from "./components/common/PopupVideo";
@@ -86,6 +90,15 @@ function App() {
             <Route exact path="/faq" element={<Faq />} />
             <Route exact path="/events" element={<Events />} />
             <Route exact path="/event-detail/:id" element={<EventDetail />} />
+
+            <Route exact path="/blogs" element={<Blogs />} />
+            <Route exact path="/blog-detail/:id" element={<BlogDetail />} />
+            <Route
+              exact
+              path="/uk-corporate-culture"
+              element={<UkCorporate />}
+            />
+
             <Route exact path="/signin" element={<Signin />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/forgot-password" element={<Forgot />} />
@@ -97,6 +110,11 @@ function App() {
               }
             />
             <Route exact path="/job-profile" element={<JobProfile />} />
+            <Route
+              exact
+              path="/job-profile-detail/:id"
+              element={<JobProfileDetail />}
+            />
             <Route exact path="/booking" element={<Booking />} />
             <Route exact path="/privacy-policy" element={<Privacy />} />
             <Route exact path="/disclaimer" element={<Disclaim />} />

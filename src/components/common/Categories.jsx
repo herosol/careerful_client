@@ -2,7 +2,7 @@ import React from "react";
 import CategoryBlk from "./CategoryBlk";
 import Text from "./Text";
 
-function Categories({ data, content }) {
+function Categories({ data, content, sec6s }) {
   return (
     <>
       <section id="categories">
@@ -16,10 +16,10 @@ function Categories({ data, content }) {
             </h2>
           </div>
           <div className="flex_row main_row">
-            {data.block.map((val) => {
+            {sec6s.map((val) => {
               return (
                 <div className="col" key={val.id}>
-                  <CategoryBlk {...val} />
+                  <CategoryBlk val={val} />
                 </div>
               );
             })}

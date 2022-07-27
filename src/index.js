@@ -13,6 +13,7 @@ import store from "./states/store";
 
 import "./App.scss";
 import "./custom.css";
+import "./style.css";
 import App from "./App.jsx";
 
 import "react-toastify/dist/ReactToastify.css";

@@ -20,7 +20,16 @@ const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.fetchHome.content);
   const isLoading = useSelector((state) => state.fetchHome.isLoading);
-  const { content, partners, sponsors, testimonials } = data;
+  const {
+    content,
+    partners,
+    sponsors,
+    testimonials,
+    sec6s,
+    sec7s,
+    sec8s,
+    candidates_images
+  } = data;
 
   useEffect(() => {
     dispatch(fetchHome());
@@ -33,11 +42,20 @@ const Home = () => {
         <LoadingScreen />
       ) : (
         <>
-          <Banner data={banner} />
+          <Banner
+            data={banner}
+            content={content}
+            candidates_images={candidates_images}
+          />
           <Brands partners={partners} />
           <Steps content={content} />
-          <Journey data={journey} content={content} />
-          <Categories data={categories} content={content} />
+          <Journey
+            data={journey}
+            content={content}
+            sec7s={sec7s}
+            sec8s={sec8s}
+          />
+          <Categories data={categories} content={content} sec6s={sec6s} />
           <Sponsor content={content} sponsors={sponsors} />
           <Folio data={folio} content={content} testimonials={testimonials} />
         </>

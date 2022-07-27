@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Slider from "react-slick";
-import FaqBlk from "../../common/FaqBlk";
+import FaqBlk from "./FaqBlk";
 import Text from "../../common/Text";
+import ImageControl from "../../common/ImageControl";
 
-const Journey = ({ data, content }) => {
+const Journey = ({ data, content, sec7s, sec8s }) => {
   const [slider, setSlider] = useState();
   const [thumbs, setThumbs] = useState();
   const settings = {
@@ -43,10 +44,10 @@ const Journey = ({ data, content }) => {
                   asNavFor={thumbs}
                   ref={(slider1) => setSlider(slider1)}
                 >
-                  {data.block.map((val) => {
+                  {sec7s.map((val) => {
                     return (
                       <div className="item" key={val.id}>
-                        <FaqBlk {...val} />
+                        <FaqBlk faq={val} />
                       </div>
                     );
                   })}
@@ -60,11 +61,15 @@ const Journey = ({ data, content }) => {
                   asNavFor={slider}
                   ref={(slider2) => setThumbs(slider2)}
                 >
-                  {data.thumbs.map((val) => {
+                  {sec8s.map((val) => {
                     return (
                       <div className="item" key={val.id}>
                         <div className="fig">
-                          <img src={val.src} alt={val.alt} />
+                          <ImageControl
+                            src={val.image}
+                            folder="images"
+                            isThumb={true}
+                          />
                         </div>
                       </div>
                     );
