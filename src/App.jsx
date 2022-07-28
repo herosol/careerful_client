@@ -35,6 +35,15 @@ import Subscription from "./components/pages/subscription/Index";
 import Blogs from "./components/pages/blogs";
 import BlogDetail from "./components/pages/blogs/Detail";
 import UkCorporate from "./components/pages/uk_corporate/Index";
+import Testimonials from "./components/pages/testimonials/Index";
+import RecruitmentProcess from "./components/pages/recruitment_process/Index";
+import CvCoverLetter from "./components/pages/cv_cover_letter/Index";
+import CvGuidance from "./components/pages/cv_guidance/Index";
+import CoverLetterGuidance from "./components/pages/cover_letter_guidance/Index";
+import CvBuilder from "./components/pages/cv_builder/Index";
+import CoverLetterBuilder from "./components/pages/cover_letter_builder/Index";
+import AssessmentCenter from "./components/pages/assessment_center/Index";
+import Interview from "./components/pages/interview/Index";
 // Error & Popup
 import Error from "./components/pages/error/Index";
 import PopupVideo from "./components/common/PopupVideo";
@@ -90,7 +99,6 @@ function App() {
             <Route exact path="/faq" element={<Faq />} />
             <Route exact path="/events" element={<Events />} />
             <Route exact path="/event-detail/:id" element={<EventDetail />} />
-
             <Route exact path="/blogs" element={<Blogs />} />
             <Route exact path="/blog-detail/:id" element={<BlogDetail />} />
             <Route
@@ -98,7 +106,36 @@ function App() {
               path="/uk-corporate-culture"
               element={<UkCorporate />}
             />
+            <Route exact path="/testimonials" element={<Testimonials />} />
+            <Route exact path="/cv-guidance" element={<CvGuidance />} />
+            <Route
+              exact
+              path="/cover-letter-guidance"
+              element={<CoverLetterGuidance />}
+            />
+            <Route
+              exact
+              path="/cv-and-cover-letter"
+              element={<CvCoverLetter />}
+            />
+            <Route
+              exact
+              path="/recruitment-process"
+              element={<RecruitmentProcess />}
+            />
+            <Route
+              exact
+              path="/assessment-center"
+              element={<AssessmentCenter />}
+            />
+            <Route exact path="/interview" element={<Interview />} />
 
+            <Route exact path="/cv-builder" element={<CvBuilder />} />
+            <Route
+              exact
+              path="/cover-letter-builder"
+              element={<CoverLetterBuilder />}
+            />
             <Route exact path="/signin" element={<Signin />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/forgot-password" element={<Forgot />} />

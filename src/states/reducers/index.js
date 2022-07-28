@@ -21,6 +21,15 @@ import fetchBlogs from "./fetchBlogs";
 import fetchBlogDetail from "./fetchBlogDetail";
 import fetchJobProfileDetail from "./fetchJobProfileDetail";
 import fetchUkCorporate from "./fetchUkCorporate";
+import fetchTestimonials from "./fetchTestimonials";
+import fetchRecrProcess from "./fetchRecrProcess";
+import fetchCvCoverLetter from "./fetchCvCoverLetter";
+import fetchCvGuidance from "./fetchCvGuidance";
+import fetchCoverLetterGuidance from "./fetchCoverLetterGuidance";
+import fetchCvBuilder from "./fetchCvBuilder";
+import fetchCoverLetterBuilder from "./fetchCoverLetterBuilder";
+import fetchAssessmentCenter from "./fetchAssessmentCenter";
+import fetchInterview from "./fetchInterview";
 
 export default combineReducers({
   fetchHome,
@@ -44,5 +53,14 @@ export default combineReducers({
   fetchBlogs,
   fetchBlogDetail,
   fetchJobProfileDetail,
-  fetchUkCorporate
+  fetchUkCorporate,
+  fetchTestimonials,
+  fetchRecrProcess,
+  fetchCvCoverLetter,
+  fetchCvGuidance,
+  fetchCoverLetterGuidance,
+  fetchCvBuilder,
+  fetchCoverLetterBuilder,
+  fetchAssessmentCenter,
+  fetchInterview
 });
