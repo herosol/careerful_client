@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import fetchSiteSettings from "./fetchSiteSettings";
 import fetchHome from "./fetchHome";
 import fetchAboutUs from "./fetchAboutUs";
 import fetchTerms from "./fetchTerms";
@@ -30,8 +31,13 @@ import fetchCvBuilder from "./fetchCvBuilder";
 import fetchCoverLetterBuilder from "./fetchCoverLetterBuilder";
 import fetchAssessmentCenter from "./fetchAssessmentCenter";
 import fetchInterview from "./fetchInterview";
+import fetchOnlineTest from "./fetchOnlineTest";
+import fetchTestCategories from "./fetchTestCategories";
+import fetchTestCategyDetail from "./fetchTestCategyDetail";
+import fetchCareerOptions from "./fetchCareerOptions";
 
 export default combineReducers({
+  fetchSiteSettings,
   fetchHome,
   fetchAboutUs,
   fetchTerms,
@@ -62,5 +68,9 @@ export default combineReducers({
   fetchCvBuilder,
   fetchCoverLetterBuilder,
   fetchAssessmentCenter,
-  fetchInterview
+  fetchInterview,
+  fetchOnlineTest,
+  fetchTestCategories,
+  fetchTestCategyDetail,
+  fetchCareerOptions
 });

@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, Outlet } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+// import { fetchSiteSettings } from "./states/reducers/fetchSiteSettings";
+import { fetchSiteSettings } from "./states/actions/fetchSiteSettings";
 // Common Pages
 import ScrollToTop from "./components/common/ScrollToTop";
 import Header from "./components/includes/Header";
@@ -44,6 +47,10 @@ import CvBuilder from "./components/pages/cv_builder/Index";
 import CoverLetterBuilder from "./components/pages/cover_letter_builder/Index";
 import AssessmentCenter from "./components/pages/assessment_center/Index";
 import Interview from "./components/pages/interview/Index";
+import OnlineTest from "./components/pages/online_test/Index";
+import OnlineTestDetail from "./components/pages/online_test/Detail";
+import TestStart from "./components/pages/online_test/Apply";
+import CareerOptions from "./components/pages/career_options/Index";
 // Error & Popup
 import Error from "./components/pages/error/Index";
 import PopupVideo from "./components/common/PopupVideo";
@@ -51,13 +58,21 @@ import PopupVideo from "./components/common/PopupVideo";
 
 import { Navigate } from "react-router-dom";
 
-import { useSelector } from "react-redux";
-
 function App() {
   const [state, setState] = useState({
     PopupVideo: false
     // PopupRegister: false,
   });
+
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(fetchSiteSettings());
+  // }, []);
+
+  // const siteSettings = useSelector((state) => state.fetchSiteSettings.content);
+  // const isGloballyLoading = useSelector(
+  //   (state) => state.fetchSiteSettings.isGloballyLoading
+  // );
 
   const authToken = useSelector((state) => state.fetchSignin.authToken);
   // const showPopupVideo = () => {
@@ -129,6 +144,13 @@ function App() {
               element={<AssessmentCenter />}
             />
             <Route exact path="/interview" element={<Interview />} />
+            <Route exact path="/online-test" element={<OnlineTest />} />
+            <Route
+              exact
+              path="/online-test/categories/:catId"
+              element={<OnlineTestDetail />}
+            />
+            <Route exact path="/test/apply/:catId" element={<TestStart />} />
 
             <Route exact path="/cv-builder" element={<CvBuilder />} />
             <Route
@@ -136,6 +158,7 @@ function App() {
               path="/cover-letter-builder"
               element={<CoverLetterBuilder />}
             />
+            <Route exact path="/career-options" element={<CareerOptions />} />
             <Route exact path="/signin" element={<Signin />} />
             <Route exact path="/signup" element={<Signup />} />
             <Route exact path="/forgot-password" element={<Forgot />} />

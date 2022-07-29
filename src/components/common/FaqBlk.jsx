@@ -7,12 +7,12 @@ function FaqBlk(f) {
     <>
       <div className={show ? "faq_blk active" : "faq_blk"}>
         <h5 className="fancy" onClick={() => setShow(!show)}>
-          <Text string={f.question} />
+          <Text string={f.title} />
         </h5>
         {show && (
           <div className="txt">
             <p>
-              <Text string={f.answer} parse={true} />
+              <Text string={f.detail} parse={true} />
             </p>
           </div>
         )}

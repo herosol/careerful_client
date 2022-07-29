@@ -32,6 +32,10 @@ const Home = () => {
   } = data;
 
   useEffect(() => {
+    console.log("Home Console");
+  }, []);
+
+  useEffect(() => {
     dispatch(fetchHome());
   }, []);
 
